@@ -1,0 +1,44 @@
+{
+  "name": "@adobe/lit-mobx",
+  "version": "0.0.1",
+  "description": "Integrating mobx with lit-element!",
+  "license": "BSD-3-Clause",
+  "homepage": "http://opensource.adobe.com",
+  "repository": "adobe/lit-mobx",
+  "main": "lit-mobx.js",
+  "module": "lit-mobx.js",
+  "directories": {
+    "test": "test"
+  },
+  "files": [
+    "/src/",
+    "/lit-mobx.d.ts",
+    "/lit-mobx.d.ts.map",
+    "/lit-mobx.js",
+    "/lit-mobx.js.map"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:demo": "cd demo; tsc",
+    "prepare": "npm run build",
+    "demo": "npm run build:demo & es-dev-server"
+  },
+  "author": "Ben Delarre",
+  "peerDependencies": {
+    "mobx": "^5.0.0",
+    "lit-element": "^2.0.0"
+  },
+  "devDependencies": {
+    "es-dev-server": "^1.10.4",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.4.1"
+  },
+  "typings": "lit-mobx.d.ts",
+  "dependencies": {
+    "lit-element": "^2.0.0",
+    "mobx": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
