@@ -50,3 +50,9 @@ export class MyElement extends ObserveRender(LitElement) {
     }
 }
 ```
+
+## Contributing
+Contributions are welcomed! Read the Contributing Guide for more information.
+
+## Licensing
+This project is licensed under the Apache V2 License. See LICENSE for more information.
