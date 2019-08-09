@@ -9,7 +9,10 @@ export class MyElement extends ObserveRender(LitElement) {
     private counter = new Counter();
 
     public render(): TemplateResult {
-        return html`Count is ${this.counter.count}<br/><button @click=${this.incrementCount}>Add</button>`;
+        return html`
+            Count is ${this.counter.count}<br/>
+            <button @click=${this.incrementCount}>Add</button>
+        `;
     }
 
     private incrementCount() {
