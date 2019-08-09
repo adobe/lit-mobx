@@ -51,8 +51,10 @@ export class MyElement extends ObserveRender(LitElement) {
 }
 ```
 
-## Contributing
-Contributions are welcomed! Read the Contributing Guide for more information.
+### Contributing
 
-## Licensing
-This project is licensed under the Apache V2 License. See LICENSE for more information.
+Contributions are welcomed! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.
+
+### Licensing
+
+This project is licensed under the Apache V2 License. See [LICENSE](LICENSE) for more information.
