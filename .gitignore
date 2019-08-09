@@ -6,4 +6,7 @@ lit-mobx.js.map
 lit-mobx.d.ts
 lit-mobx.d.ts.map
 
+demo/**/*.js
+demo/**/*.js.map
+
 .DS_Store
