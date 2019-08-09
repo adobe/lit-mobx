@@ -2,7 +2,7 @@
   "name": "@adobe/lit-mobx",
   "version": "0.0.1",
   "description": "Integrating mobx with lit-element!",
-  "license": "BSD-3-Clause",
+  "license": "Apache-2.0",
   "homepage": "http://opensource.adobe.com",
   "repository": "adobe/lit-mobx",
   "main": "lit-mobx.js",
