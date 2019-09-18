@@ -1,6 +1,13 @@
 /node_modules/
 
 #Compiler Output
+lib
+
+src/**/*.js
+src/**/*.js.map
+src/**/*.d.ts
+src/**/*.d.ts.map
+
 lit-mobx.js
 lit-mobx.js.map
 lit-mobx.d.ts
