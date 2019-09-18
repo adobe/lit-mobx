@@ -14,7 +14,7 @@ import { html, TemplateResult, customElement, property } from 'lit-element';
 
 import { MobxLitElement } from '../src/lit-mobx';
 import { Counter } from './my-counter';
-import { computed } from 'mobx';
+import { computed, observable } from 'mobx';
 
 @customElement('public-observable-example')
 export class PublicObservableExample extends MobxLitElement {
@@ -31,6 +31,7 @@ export class PublicObservableExample extends MobxLitElement {
 @customElement('public-computed-example')
 export class PublicComputedExample extends MobxLitElement {
     @property({ attribute: false })
+    @observable
     public counter?: Counter;
 
     @computed
