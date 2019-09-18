@@ -11,6 +11,10 @@ governing permissions and limitations under the License.
 */
 import { Reaction } from 'mobx';
 const reactionSymbol = Symbol('LitMobxRenderReaction');
+
+// NOTE: This implementation is based heavily on the work of Alexander Weiss in his
+// [mobx-lit-element](https://github.com/alexanderweiss/mobx-lit-element)
+
 /**
  * A class mixin which can be applied to lit-element's
  * [UpdatingElement](https://lit-element.polymer-project.org/api/classes/_lib_updating_element_.updatingelement.html)
@@ -28,9 +32,11 @@ export function MobxReactionUpdate(constructor) {
         }
         connectedCallback() {
             super.connectedCallback();
-            this[reactionSymbol] = new Reaction(`${this.constructor.name || this.nodeName}.update()`, () => this.requestUpdate());
-            if (this.hasUpdated)
-                this.requestUpdate();
+            this[reactionSymbol] = new Reaction(
+                `${this.constructor.name || this.nodeName}.update()`,
+                () => this.requestUpdate()
+            );
+            if (this.hasUpdated) this.requestUpdate();
         }
         disconnectedCallback() {
             super.disconnectedCallback();
