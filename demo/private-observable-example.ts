@@ -10,19 +10,24 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { LitElement, html, property, TemplateResult, customElement } from 'lit-element';
+import { html, TemplateResult, customElement } from 'lit-element';
 
-import { ObserveRender } from '../src/lit-mobx';
+import { MobxLitElement } from '../src/lit-mobx';
 import { Counter } from './my-counter';
 
-@customElement('my-element')
-export class MyElement extends ObserveRender(LitElement) {
-    @property({ type: Object })
+@customElement('private-observable-example')
+export class PrivateObservableExample extends MobxLitElement {
     private counter = new Counter();
 
     public render(): TemplateResult {
         return html`
-            Count is ${this.counter.count}<br/>
+            <h3>Private Observable Example</h3>
+            <p>
+                In this example an observable is defined as a private property
+                on the custom element.
+            </p>
+            Count is ${this.counter.count}
+            <br />
             <button @click=${this.incrementCount}>Add</button>
         `;
     }

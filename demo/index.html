@@ -1,12 +1,16 @@
 <html>
+    <head>
+        <title>lit-mobx: MobxLitElement demo</title>
+        <script src="./private-observable-example.js" type="module"></script>
+        <script src="./public-property-example.js" type="module"></script>
+        <script src="./mixin-example.js" type="module"></script>
+        <script src="./detaching-example.js" type="module"></script>
+    </head>
 
-<head>
-    <title>lit-mobx: ObserveRender mixin demo</title>
-</head>
-
-<body>
-    <my-element></my-element>
-</body>
-<script src="./my-element.js" type="module"></script>
-
+    <body>
+        <private-observable-example></private-observable-example>
+        <public-property-example></public-property-example>
+        <mixin-example></mixin-example>
+        <detaching-example></detaching-example>
+    </body>
 </html>
