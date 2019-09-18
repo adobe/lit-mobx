@@ -14,6 +14,7 @@ import { html, TemplateResult, customElement, property } from 'lit-element';
 
 import { MobxLitElement } from '../src/lit-mobx';
 import { Counter } from './my-counter';
+import { computed } from 'mobx';
 
 @customElement('public-observable-example')
 export class PublicObservableExample extends MobxLitElement {
@@ -23,6 +24,25 @@ export class PublicObservableExample extends MobxLitElement {
     public render(): TemplateResult {
         return html`
             Count is ${this.counter ? this.counter.count : 'Not Set'}
+        `;
+    }
+}
+
+@customElement('public-computed-example')
+export class PublicComputedExample extends MobxLitElement {
+    @property({ attribute: false })
+    public counter?: Counter;
+
+    @computed
+    get isMoreThanFive() {
+        return this.counter && this.counter.count > 5;
+    }
+
+    public render(): TemplateResult {
+        return html`
+            ${this.isMoreThanFive
+                ? 'It is more than five'
+                : 'It is less than or equal to five'}
         `;
     }
 }
@@ -38,9 +58,18 @@ export class PublicPropertyExample extends MobxLitElement {
                 In this example an observable is passed into a custom element as
                 a public property and driven from outside the element.
             </p>
+            <p>
+                We also pass the same observable to another element which uses a
+                mobx computed property to calculate a new value which is also
+                updated.
+            </p>
             <public-observable-example
                 .counter=${this.counter}
             ></public-observable-example>
+            <br />
+            <public-computed-example
+                .counter=${this.counter}
+            ></public-computed-example>
             <br />
             <button @click=${this.incrementCount}>Add</button>
         `;

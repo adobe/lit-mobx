@@ -1,12 +1,11 @@
 # lit-mobx
 
-Mixins, base classes and decorators that allow easy usage of mobx observables with
+Mixin and base class that allow easy usage of mobx observables with
 [`lit-element`](https://lit-element.polymer-project.org/).
 
 The mixin implementation is based heavily on the work of Alexander Weiss in his
 [`mobx-lit-element`](https://github.com/alexanderweiss/mobx-lit-element) implementation. This has been rewritten to
-support multiple forms of usage (mixin, decorator or base class) as well as to be based on typescript to get type
-definitions.
+support multiple forms of usage (mixin, or base class) as well as to be based on typescript to get type definitions.
 
 ## Installation
 
@@ -39,6 +38,7 @@ class Counter {
 }
 
 // create a new custom element, and use the base MobxLitElement class
+// alternatively you can use the MobxReactionUpdate mixin, e.g. `class MyElement extends MobxReactionUpdate(LitElement)`
 @customElement('my-element')
 export class MyElement extends MobxLitElement {
     private counter = new Counter();
@@ -58,7 +58,7 @@ export class MyElement extends MobxLitElement {
 }
 ```
 
-For further examples see the demo folder for examples using public properties, decorators, and mixin forms.
+For further examples see the demo folder.
 
 ### Contributing
 
