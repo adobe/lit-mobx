@@ -2,8 +2,7 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "declaration": false,
-        "declarationMap": false,
-        "experimentalDecorators": true
+        "declarationMap": false
     },
     "include": ["./*.ts"]
 }

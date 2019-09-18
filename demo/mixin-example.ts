@@ -23,7 +23,7 @@ export class MixinExample extends MobxReactionUpdate(LitElement) {
         return html`
             <h3>Mixin Example</h3>
             <p>
-                In this example we use the mixin to create out custom element.
+                In this example we use the mixin to create our custom element.
             </p>
             Count is ${this.counter.count}
             <br />

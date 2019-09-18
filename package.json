@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "description": "Integrating mobx with lit-element!",
     "license": "Apache-2.0",
-    "homepage": "https://opensource.adobe.com",
     "repository": "https://github.com/adobe/lit-mobx",
     "main": "lit-mobx.js",
     "module": "lit-mobx.js",
@@ -23,10 +22,10 @@
         "/lit-mobx.js.map"
     ],
     "scripts": {
-        "build": "tsc",
-        "build:demo": "npm run build; cd demo; tsc",
-        "prepare": "npm run build",
-        "demo": "npm run build:demo & es-dev-server"
+        "build": "tsc --build tsconfig.json; tsc --build demo/tsconfig.json",
+        "build:watch": "tsc --build tsconfig.json -w & tsc --build demo/tsconfig.json -w",
+        "prepublishOnly": "npm run build",
+        "demo": "npm run build:watch & es-dev-server"
     },
     "peerDependencies": {
         "mobx": "^5.0.0",
@@ -34,7 +33,9 @@
     },
     "devDependencies": {
         "es-dev-server": "^1.10.4",
-        "typescript": "^3.4.1"
+        "typescript": "^3.4.1",
+        "mobx": "^5.0.0",
+        "lit-element": "^2.0.0"
     },
     "typings": "lit-mobx.d.ts",
     "publishConfig": {

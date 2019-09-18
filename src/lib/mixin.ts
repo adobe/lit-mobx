@@ -13,16 +13,9 @@ governing permissions and limitations under the License.
 import { UpdatingElement, PropertyValues } from 'lit-element';
 import { Reaction } from 'mobx';
 
-const reactionSymbol = Symbol('LitMobxRenderReaction');
+const reaction = Symbol('LitMobxRenderReaction');
 
 type UpdatingElementConstructor = new (...args: any[]) => UpdatingElement;
-
-export interface ObserveRenderMixin {
-    readonly isObserving: boolean;
-}
-
-type ReturnConstructor = new (...args: any[]) => UpdatingElement &
-    ObserveRenderMixin;
 
 /**
  * A class mixin which can be applied to lit-element's
@@ -36,18 +29,14 @@ type ReturnConstructor = new (...args: any[]) => UpdatingElement &
  */
 export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
     constructor: T
-): T & ReturnConstructor {
+): T {
     return class MobxReactingElement extends constructor {
         // NOTE: using a symbol here to avoid potential name collisions in derived classes
-        private [reactionSymbol]: Reaction;
-
-        public get isObserving(): boolean {
-            return this[reactionSymbol] !== undefined;
-        }
+        private [reaction]: Reaction | undefined;
 
         public connectedCallback(): void {
             super.connectedCallback();
-            this[reactionSymbol] = new Reaction(
+            this[reaction] = new Reaction(
                 `${this.constructor.name || this.nodeName}.update()`,
                 () => this.requestUpdate()
             );
@@ -56,19 +45,20 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
 
         public disconnectedCallback(): void {
             super.disconnectedCallback();
-            if (this[reactionSymbol]) {
-                this[reactionSymbol].dispose();
+            if (this[reaction]) {
+                this[reaction]!.dispose();
+                this[reaction] = undefined;
             }
         }
 
         protected update(changedProperties: PropertyValues): void {
-            let result;
-            if (this[reactionSymbol]) {
-                this[reactionSymbol].track(() => {
-                    result = super.update(changedProperties);
+            if (this[reaction]) {
+                this[reaction]!.track(() => {
+                    super.update(changedProperties);
                 });
+            } else {
+                super.update(changedProperties);
             }
-            return result;
         }
     };
 }
