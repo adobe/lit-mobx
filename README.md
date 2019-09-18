@@ -23,13 +23,7 @@ npm run demo
 ## Usage
 
 ```typescript
-import {
-    LitElement,
-    html,
-    property,
-    TemplateResult,
-    customElement,
-} from 'lit-element';
+import { LitElement, html, TemplateResult, customElement } from 'lit-element';
 import { observable, action } from 'mobx';
 import { MobxLitElement } from 'lit-mobx';
 
