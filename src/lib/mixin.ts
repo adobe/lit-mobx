@@ -10,11 +10,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { UpdatingElement, PropertyValues } from 'lit-element';
+import { UpdatingElement } from 'lit-element';
 import { Reaction } from 'mobx';
 
 const reaction = Symbol('LitMobxRenderReaction');
 const cachedRequestUpdate = Symbol('LitMobxRequestUpdate');
+const cachedPerformUpdate = Symbol('LitMobxPerformUpdate');
 
 type UpdatingElementConstructor = new (...args: any[]) => UpdatingElement;
 
@@ -36,6 +37,7 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
         private [reaction]: Reaction | undefined;
 
         private [cachedRequestUpdate] = () => this.requestUpdate();
+        private [cachedPerformUpdate] = () => super.performUpdate();
 
         public connectedCallback(): void {
             super.connectedCallback();
@@ -54,13 +56,11 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
             }
         }
 
-        protected update(changedProperties: PropertyValues): void {
+        protected performUpdate(): void {
             if (this[reaction]) {
-                this[reaction]!.track(() => {
-                    super.update(changedProperties);
-                });
+                this[reaction]!.track(this[cachedPerformUpdate]!);
             } else {
-                super.update(changedProperties);
+                super.performUpdate();
             }
         }
     };
