@@ -22,7 +22,7 @@
         "/lit-mobx.js.map"
     ],
     "scripts": {
-        "build": "tsc --build tsconfig.json; tsc --build demo/tsconfig.json",
+        "build": "tsc --build tsconfig.json && tsc --build demo/tsconfig.json",
         "build:watch": "tsc --build tsconfig.json -w & tsc --build demo/tsconfig.json -w",
         "prepublishOnly": "npm run build",
         "demo": "npm run build:watch & es-dev-server"

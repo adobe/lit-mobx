@@ -14,6 +14,7 @@ import { UpdatingElement, PropertyValues } from 'lit-element';
 import { Reaction } from 'mobx';
 
 const reaction = Symbol('LitMobxRenderReaction');
+const cachedRequestUpdate = Symbol('LitMobxRequestUpdate');
 
 type UpdatingElementConstructor = new (...args: any[]) => UpdatingElement;
 
@@ -34,11 +35,13 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
         // NOTE: using a symbol here to avoid potential name collisions in derived classes
         private [reaction]: Reaction | undefined;
 
+        private [cachedRequestUpdate] = () => this.requestUpdate();
+
         public connectedCallback(): void {
             super.connectedCallback();
             this[reaction] = new Reaction(
                 `${this.constructor.name || this.nodeName}.update()`,
-                () => this.requestUpdate()
+                this[cachedRequestUpdate]
             );
             if (this.hasUpdated) this.requestUpdate();
         }
