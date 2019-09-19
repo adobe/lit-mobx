@@ -16,7 +16,7 @@ commands:
                       - v1-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
             - run:
                   name: Installing Dependencies
-                  command: npm install
+                  command: npm i
             - save_cache:
                   paths:
                       - node_modules
