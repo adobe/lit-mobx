@@ -12,13 +12,16 @@ support multiple forms of usage (mixin, or base class) as well as to be based on
 
 ## Installation
 
+As a dependency:
+
 ```
-npm install
+npm install --save @adobe/lit-mobx
 ```
 
 ## Demo
 
 ```
+npm install
 npm run demo
 ```
 
