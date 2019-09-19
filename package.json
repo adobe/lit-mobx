@@ -1,6 +1,6 @@
 {
     "name": "@adobe/lit-mobx",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Integrating mobx with lit-element!",
     "license": "Apache-2.0",
     "repository": "https://github.com/adobe/lit-mobx",
@@ -25,17 +25,28 @@
         "build": "tsc --build tsconfig.json && tsc --build demo/tsconfig.json",
         "build:watch": "tsc --build tsconfig.json -w & tsc --build demo/tsconfig.json -w",
         "prepublishOnly": "npm run build",
-        "demo": "npm run build:watch & es-dev-server"
+        "demo": "npm run build:watch & es-dev-server",
+        "test": "npm run test:build && karma start --coverage",
+        "test:build": "npm run build && tsc --build test/tsconfig.json",
+        "test:build-watch": "npm run build:watch & tsc --build test/tsconfig.json -w",
+        "test:watch": "npm run test:build-watch & karma start --auto-watch=true --single-run=false",
+        "test:update-snapshots": "karma start --update-snapshots",
+        "test:prune-snapshots": "karma start --prune-snapshots",
+        "test:compatibility": "karma start --compatibility all --auto-watch=true --single-run=false"
     },
     "peerDependencies": {
         "mobx": "^5.0.0",
         "lit-element": "^2.0.0"
     },
     "devDependencies": {
+        "@open-wc/testing": "^2.3.4",
+        "@open-wc/testing-karma": "^3.1.33",
+        "deepmerge": "^4.0.0",
         "es-dev-server": "^1.10.4",
-        "typescript": "^3.4.1",
+        "karma": "^4.3.0",
+        "lit-element": "^2.0.0",
         "mobx": "^5.0.0",
-        "lit-element": "^2.0.0"
+        "typescript": "^3.4.1"
     },
     "typings": "lit-mobx.d.ts",
     "publishConfig": {

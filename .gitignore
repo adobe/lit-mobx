@@ -1,7 +1,14 @@
 /node_modules/
 
+coverage
 #Compiler Output
+*.tsbuildinfo
 lib
+
+test/**/*.js
+test/**/*.js.map
+test/**/*.d.ts
+test/**/*.d.ts.map
 
 src/**/*.js
 src/**/*.js.map

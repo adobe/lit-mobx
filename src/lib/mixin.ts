@@ -41,8 +41,10 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
 
         public connectedCallback(): void {
             super.connectedCallback();
+            /* istanbul ignore next */
+            const name = this.constructor.name || this.nodeName;
             this[reaction] = new Reaction(
-                `${this.constructor.name || this.nodeName}.update()`,
+                `${name}.update()`,
                 this[cachedRequestUpdate]
             );
             if (this.hasUpdated) this.requestUpdate();
@@ -50,6 +52,7 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
 
         public disconnectedCallback(): void {
             super.disconnectedCallback();
+            /* istanbul ignore else */
             if (this[reaction]) {
                 this[reaction]!.dispose();
                 this[reaction] = undefined;
