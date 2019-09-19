@@ -1,5 +1,8 @@
 # lit-mobx
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/adobe/lit-mobx.svg)](https://greenkeeper.io/)
+
+
 Mixin and base class that allow easy usage of mobx observables with
 [`lit-element`](https://lit-element.polymer-project.org/).
 
