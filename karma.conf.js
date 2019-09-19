@@ -21,6 +21,16 @@ module.exports = (config) => {
                 // if you are using 'bare module imports' you will need this option
                 nodeResolve: true,
             },
+            coverageIstanbulReporter: {
+                thresholds: {
+                    global: {
+                        statements: 100,
+                        branches: 100,
+                        functions: 100,
+                        lines: 100,
+                    },
+                },
+            },
         })
     );
     return config;
