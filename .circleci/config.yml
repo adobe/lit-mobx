@@ -1,0 +1,36 @@
+version: 2.1
+executors:
+    node8:
+        docker:
+            - image: circleci/node:10.16.0-browsers
+        environment:
+            NPM_CONFIG_PREFIX: ~/.npm-global
+            CHROME_BIN: /usr/bin/google-chrome
+            FIREFOX_BIN: /usr/local/bin/firefox
+commands:
+    setup:
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
+            - run:
+                  name: Installing Dependencies
+                  command: npm install
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: v1-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
+jobs:
+    build:
+        executor: node8
+
+        steps:
+            - setup
+            - run: npm build
+
+workflows:
+    version: 2
+    build:
+        jobs:
+            - build
