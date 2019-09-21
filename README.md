@@ -15,7 +15,7 @@ support multiple forms of usage (mixin, or base class) as well as to be based on
 As a dependency:
 
 ```
-npm install --save @adobe/lit-mobx
+npm install --save @adobe/lit-mobx lit-element mobx
 ```
 
 ## Demo
@@ -30,7 +30,7 @@ npm run demo
 ```typescript
 import { LitElement, html, TemplateResult, customElement } from 'lit-element';
 import { observable, action } from 'mobx';
-import { MobxLitElement } from 'lit-mobx';
+import { MobxLitElement } from '@adobe/lit-mobx';
 
 // create a mobx observable
 class Counter {
