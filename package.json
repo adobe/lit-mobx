@@ -45,7 +45,7 @@
         "es-dev-server": "^1.10.4",
         "karma": "^4.3.0",
         "lit-element": "^2.0.0",
-        "mobx": "^5.0.0",
+        "mobx": "^5.14.2",
         "typescript": "^3.4.1"
     },
     "typings": "lit-mobx.d.ts",
