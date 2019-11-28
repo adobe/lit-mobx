@@ -43,11 +43,14 @@ class Counter {
     }
 }
 
+// create instance that can be shared across components
+const counter = new Counter();
+
 // create a new custom element, and use the base MobxLitElement class
 // alternatively you can use the MobxReactionUpdate mixin, e.g. `class MyElement extends MobxReactionUpdate(LitElement)`
 @customElement('my-element')
 export class MyElement extends MobxLitElement {
-    private counter = new Counter();
+    private counter = counter
 
     // any observables accessed in the render method will now trigger an update
     public render(): TemplateResult {
