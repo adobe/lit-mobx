@@ -22,15 +22,17 @@ commands:
                       - node_modules
                   key: v1-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
 jobs:
-    build:
+    build_and_test:
         executor: node8
 
         steps:
             - setup
-            - run: npm build
+            - run:
+                  name: Run tests
+                  command: npm run test
 
 workflows:
     version: 2
     build:
         jobs:
-            - build
+            - build_and_test
