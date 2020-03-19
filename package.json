@@ -1,6 +1,6 @@
 {
     "name": "@adobe/lit-mobx",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Integrating mobx with lit-element!",
     "license": "Apache-2.0",
     "repository": "https://github.com/adobe/lit-mobx",
