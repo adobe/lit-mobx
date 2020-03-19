@@ -39,13 +39,13 @@
         "lit-element": "^2.0.0"
     },
     "devDependencies": {
-        "@open-wc/testing": "^2.5.4",
-        "@open-wc/testing-karma": "^3.2.42",
-        "deepmerge": "^4.0.0",
-        "es-dev-server": "^1.10.4",
-        "lit-element": "^2.0.0",
-        "mobx": "^5.14.2",
-        "typescript": "^3.7.5"
+        "@open-wc/testing": "^2.5.8",
+        "@open-wc/testing-karma": "^3.3.8",
+        "deepmerge": "^4.2.2",
+        "es-dev-server": "^1.45.2",
+        "lit-element": "^2.3.0",
+        "mobx": "^5.15.4",
+        "typescript": "^3.8.3"
     },
     "typings": "lit-mobx.d.ts",
     "publishConfig": {
