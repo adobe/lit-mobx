@@ -39,7 +39,7 @@
         "lit-element": "^2.0.0"
     },
     "devDependencies": {
-        "@open-wc/testing": "^2.5.8",
+        "@open-wc/testing": "^3.0.0",
         "@open-wc/testing-karma": "^3.3.8",
         "deepmerge": "^4.2.2",
         "es-dev-server": "^1.45.2",
