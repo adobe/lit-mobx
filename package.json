@@ -43,7 +43,7 @@
         "@open-wc/testing-karma": "^3.3.15",
         "deepmerge": "^4.2.2",
         "es-dev-server": "^1.46.5",
-        "lit-element": "^2.3.1",
+        "lit-element": "^2.0.0",
         "mobx": "^5.15.4",
         "typescript": "^3.8.3"
     },
