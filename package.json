@@ -39,11 +39,11 @@
         "lit-element": "^2.0.0"
     },
     "devDependencies": {
-        "@open-wc/testing": "^2.5.8",
-        "@open-wc/testing-karma": "^3.3.8",
+        "@open-wc/testing": "^2.5.13",
+        "@open-wc/testing-karma": "^3.3.15",
         "deepmerge": "^4.2.2",
-        "es-dev-server": "^1.45.2",
-        "lit-element": "^2.3.0",
+        "es-dev-server": "^1.46.5",
+        "lit-element": "^2.0.0",
         "mobx": "^5.15.4",
         "typescript": "^3.8.3"
     },
