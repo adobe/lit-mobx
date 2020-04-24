@@ -10,99 +10,149 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { MobxLitElement } from '../';
-import { observable, computed } from 'mobx';
-import { html, customElement, property, TemplateResult } from 'lit-element';
+import { html } from 'lit-element';
 import { expect, fixture, elementUpdated } from '@open-wc/testing';
-import { nothing } from 'lit-html';
+import {
+    TestMobxLitElementUpdatesArrays,
+    TestMobxLitElementUpdateChange,
+    TestMobxLitElementUpdatedChange,
+    TestMobxLitElementFirstUpdatedChange,
+} from './test-elements';
 
-@customElement('test-mobx-lit-element')
-export class TestMobxLitElement extends MobxLitElement {
-    @property({ attribute: false })
-    @observable
-    public observableArray?: string[];
-
-    @computed
-    private get arrayLength(): string {
-        return `Array length = ${
-            this.observableArray ? this.observableArray.length : 'N/A'
-        }`;
-    }
-
-    @property()
-    public testName = 'unset';
-
-    public render(): TemplateResult {
-        return html`
-            <p>${this.testName}</p>
-            <p>
-                ${this.observableArray
-                    ? this.observableArray.join(', ')
-                    : nothing}
-            </p>
-            <p>${this.arrayLength}</p>
-        `;
-    }
-}
+// import elements for side effects
+import './test-elements';
 
 describe('MobxLitElement', () => {
-    it('updates', async () => {
-        const el = await fixture<TestMobxLitElement>(html`
-            <test-mobx-lit-element></test-mobx-lit-element>
+    it('updates arrays', async () => {
+        const el = await fixture<TestMobxLitElementUpdatesArrays>(html`
+            <test-mobx-lit-element-updates-arrays></test-mobx-lit-element-updates-arrays>
         `);
-        expect(el).shadowDom.to.equal(
-            '<p>unset</p><p></p><p>Array length = N/A</p>'
+
+        expect(el, 'renders the initial values').shadowDom.to.equal(
+            '<p>My Array</p><p></p><p>Array length = N/A</p>'
         );
+
         el.observableArray = ['foo', 'bah'];
-
         await elementUpdated(el);
-        expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p>'
+        expect(el, 'array assignment causes update').shadowDom.to.equal(
+            '<p>My Array</p><p>foo, bah</p><p>Array length = 2</p>'
         );
-        el.observableArray.push('bash');
 
+        el.observableArray.push('bash');
         await elementUpdated(el);
-        expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah, bash</p><p>Array length = 3</p>'
+        expect(el, 'array modification causes update').shadowDom.to.equal(
+            '<p>My Array</p><p>foo, bah, bash</p><p>Array length = 3</p>'
         );
     });
+
+    it('renders changes in update callback', async () => {
+        const el = await fixture<TestMobxLitElementUpdateChange>(html`
+            <test-mobx-lit-element-update-change></test-mobx-lit-element-update-change>
+        `);
+
+        expect(el, 'renders the initial values').shadowDom.to.equal(
+            '<p>1</p><p>2</p>'
+        );
+
+        el.observableValue = 5;
+        await elementUpdated(el);
+        expect(el, 'renders the update change').shadowDom.to.equal(
+            '<p>5</p><p>10</p>'
+        );
+    });
+
+    it('renders changes in updated callback', async () => {
+        const el = await fixture<TestMobxLitElementUpdatedChange>(html`
+            <test-mobx-lit-element-updated-change></test-mobx-lit-element-updated-change>
+        `);
+
+        expect(el, 'renders the initial values').shadowDom.to.equal(
+            '<p>1</p><p>3</p>'
+        );
+
+        el.observableValue = 5;
+        await elementUpdated(el);
+        await elementUpdated(el);
+        expect(el, 'renders the updated change').shadowDom.to.equal(
+            '<p>5</p><p>15</p>'
+        );
+    });
+
+    it('renders changes in firstUpdated callback', async () => {
+        const el = await fixture<TestMobxLitElementFirstUpdatedChange>(html`
+            <test-mobx-lit-element-first-updated-change></test-mobx-lit-element-first-updated-change>
+        `);
+
+        expect(
+            el,
+            'renders the initial value including change by firstUpdated callback'
+        ).shadowDom.to.equal('<p>1</p><p>4</p>');
+
+        el.observableValue = 5;
+        await elementUpdated(el);
+        expect(
+            el,
+            'renders the updated change, but first updated is not triggered'
+        ).shadowDom.to.equal('<p>5</p><p>4</p>');
+    });
+
+    it('does not affect normal property update lifecycle', async () => {
+        const el = await fixture<TestMobxLitElementUpdatesArrays>(html`
+            <test-mobx-lit-element-updates-arrays></test-mobx-lit-element-updates-arrays>
+        `);
+
+        expect(el, 'initial values render as expected').shadowDom.to.equal(
+            '<p>My Array</p><p></p><p>Array length = N/A</p>'
+        );
+
+        el.normalProperty = 'Foo Array';
+        await elementUpdated(el);
+        expect(el, 'normal properties update normally').shadowDom.to.equal(
+            '<p>Foo Array</p><p></p><p>Array length = N/A</p>'
+        );
+    });
+
     it('handles disconnected/reconnected states', async () => {
-        const el = await fixture<TestMobxLitElement>(html`
-            <test-mobx-lit-element></test-mobx-lit-element>
+        const el = await fixture<TestMobxLitElementUpdatesArrays>(html`
+            <test-mobx-lit-element-updates-arrays></test-mobx-lit-element-updates-arrays>
         `);
 
         el.observableArray = ['foo', 'bah'];
 
         await elementUpdated(el);
-        expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p>'
+        expect(el, 'change is rendered when connected').shadowDom.to.equal(
+            '<p>My Array</p><p>foo, bah</p><p>Array length = 2</p>'
         );
         const oldParent = el.parentElement!;
         oldParent.removeChild(el);
 
         el.observableArray.push('bash');
 
-        // confirm it is unchanged while disconnected
         await elementUpdated(el);
-        expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p>'
+        expect(
+            el,
+            'observable change is not rendered when disconnected'
+        ).shadowDom.to.equal(
+            '<p>My Array</p><p>foo, bah</p><p>Array length = 2</p>'
         );
 
-        // if we drive a non-mobx update it should update everything that has changed again...
-        el.testName = 'disconnected';
+        el.normalProperty = 'Foo Array';
         await elementUpdated(el);
-        expect(el).shadowDom.to.equal(
-            '<p>disconnected</p><p>foo, bah, bash</p><p>Array length = 3</p>'
+        expect(
+            el,
+            'property changes still render, and reflect changed observables'
+        ).shadowDom.to.equal(
+            '<p>Foo Array</p><p>foo, bah, bash</p><p>Array length = 3</p>'
         );
 
-        // drive mobx again
         el.observableArray.push('bang');
-
-        // reattach
         oldParent.appendChild(el);
         await elementUpdated(el);
-        expect(el).shadowDom.to.equal(
-            '<p>disconnected</p><p>foo, bah, bash, bang</p><p>Array length = 4</p>'
+        expect(
+            el,
+            'observable change when reconnected causes render'
+        ).shadowDom.to.equal(
+            '<p>Foo Array</p><p>foo, bah, bash, bang</p><p>Array length = 4</p>'
         );
     });
 });
