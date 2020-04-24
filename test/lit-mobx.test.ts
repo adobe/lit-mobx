@@ -22,11 +22,18 @@ export class TestMobxLitElement extends MobxLitElement {
     @observable
     public observableArray?: string[];
 
+    @observable
+    public observableValue: number = 1;
+
     @computed
     private get arrayLength(): string {
         return `Array length = ${
             this.observableArray ? this.observableArray.length : 'N/A'
         }`;
+    }
+
+    public firstUpdated() {
+        this.observableValue = 10;
     }
 
     @property()
@@ -41,6 +48,7 @@ export class TestMobxLitElement extends MobxLitElement {
                     : nothing}
             </p>
             <p>${this.arrayLength}</p>
+            <p>${this.observableValue}</p>
         `;
     }
 }
@@ -50,20 +58,30 @@ describe('MobxLitElement', () => {
         const el = await fixture<TestMobxLitElement>(html`
             <test-mobx-lit-element></test-mobx-lit-element>
         `);
+        // we should see the updated value from firstUpdated
         expect(el).shadowDom.to.equal(
-            '<p>unset</p><p></p><p>Array length = N/A</p>'
+            '<p>unset</p><p></p><p>Array length = N/A</p><p>10</p>'
         );
+        // and we can drive it down to a value we specify
+        el.observableValue = 3;
+        await elementUpdated(el);
+        expect(el).shadowDom.to.equal(
+            '<p>unset</p><p></p><p>Array length = N/A</p><p>3</p>'
+        );
+
+        // and arrays update
         el.observableArray = ['foo', 'bah'];
 
         await elementUpdated(el);
         expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p>'
+            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p><p>3</p>'
         );
-        el.observableArray.push('bash');
 
+        // and modifications to the arrays update
+        el.observableArray.push('bash');
         await elementUpdated(el);
         expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah, bash</p><p>Array length = 3</p>'
+            '<p>unset</p><p>foo, bah, bash</p><p>Array length = 3</p><p>3</p>'
         );
     });
     it('handles disconnected/reconnected states', async () => {
@@ -75,7 +93,7 @@ describe('MobxLitElement', () => {
 
         await elementUpdated(el);
         expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p>'
+            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p><p>10</p>'
         );
         const oldParent = el.parentElement!;
         oldParent.removeChild(el);
@@ -85,14 +103,14 @@ describe('MobxLitElement', () => {
         // confirm it is unchanged while disconnected
         await elementUpdated(el);
         expect(el).shadowDom.to.equal(
-            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p>'
+            '<p>unset</p><p>foo, bah</p><p>Array length = 2</p><p>10</p>'
         );
 
         // if we drive a non-mobx update it should update everything that has changed again...
         el.testName = 'disconnected';
         await elementUpdated(el);
         expect(el).shadowDom.to.equal(
-            '<p>disconnected</p><p>foo, bah, bash</p><p>Array length = 3</p>'
+            '<p>disconnected</p><p>foo, bah, bash</p><p>Array length = 3</p><p>10</p>'
         );
 
         // drive mobx again
@@ -102,7 +120,7 @@ describe('MobxLitElement', () => {
         oldParent.appendChild(el);
         await elementUpdated(el);
         expect(el).shadowDom.to.equal(
-            '<p>disconnected</p><p>foo, bah, bash, bang</p><p>Array length = 4</p>'
+            '<p>disconnected</p><p>foo, bah, bash, bang</p><p>Array length = 4</p><p>10</p>'
         );
     });
 });

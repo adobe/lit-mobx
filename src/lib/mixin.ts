@@ -15,7 +15,6 @@ import { Reaction } from 'mobx';
 
 const reaction = Symbol('LitMobxRenderReaction');
 const cachedRequestUpdate = Symbol('LitMobxRequestUpdate');
-const cachedPerformUpdate = Symbol('LitMobxPerformUpdate');
 
 type UpdatingElementConstructor = new (...args: any[]) => UpdatingElement;
 
@@ -36,8 +35,9 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
         // NOTE: using a symbol here to avoid potential name collisions in derived classes
         private [reaction]: Reaction | undefined;
 
-        private [cachedRequestUpdate] = () => this.requestUpdate();
-        private [cachedPerformUpdate] = () => super.performUpdate();
+        private [cachedRequestUpdate] = () => {
+            this.requestUpdate();
+        };
 
         public connectedCallback(): void {
             super.connectedCallback();
@@ -59,11 +59,15 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
             }
         }
 
-        protected performUpdate(): void {
+        protected update(
+            _changedProperties: Map<string | number | symbol, unknown>
+        ): void {
             if (this[reaction]) {
-                this[reaction]!.track(this[cachedPerformUpdate]!);
+                this[reaction]!.track(
+                    super.update.bind(this, _changedProperties)
+                );
             } else {
-                super.performUpdate();
+                super.update(_changedProperties);
             }
         }
     };
