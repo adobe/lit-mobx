@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { UpdatingElement } from 'lit-element';
+import { UpdatingElement, PropertyValues } from 'lit-element';
 import { Reaction } from 'mobx';
 
 const reaction = Symbol('LitMobxRenderReaction');
@@ -59,15 +59,13 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
             }
         }
 
-        protected update(
-            _changedProperties: Map<string | number | symbol, unknown>
-        ): void {
+        protected update(changedProperties: PropertyValues): void {
             if (this[reaction]) {
                 this[reaction]!.track(
-                    super.update.bind(this, _changedProperties)
+                    super.update.bind(this, changedProperties)
                 );
             } else {
-                super.update(_changedProperties);
+                super.update(changedProperties);
             }
         }
     };

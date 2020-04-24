@@ -12,7 +12,13 @@ governing permissions and limitations under the License.
 
 import { MobxLitElement } from '../';
 import { observable, computed } from 'mobx';
-import { html, customElement, property, TemplateResult } from 'lit-element';
+import {
+    html,
+    customElement,
+    property,
+    TemplateResult,
+    PropertyValues,
+} from 'lit-element';
 import { expect, fixture, elementUpdated } from '@open-wc/testing';
 import { nothing } from 'lit-html';
 
@@ -53,7 +59,7 @@ export class TestMobxLitElementUpdateChange extends MobxLitElement {
     @observable
     private derivedValue: number = 1;
 
-    public update(changedProperties: Map<string | number | symbol, unknown>) {
+    public update(changedProperties: PropertyValues) {
         super.update(changedProperties);
         this.derivedValue = this.observableValue * 2;
     }
@@ -74,7 +80,7 @@ export class TestMobxLitElementUpdatedChange extends MobxLitElement {
     @observable
     private derivedValue: number = 1;
 
-    public updated(changedProperties: Map<string | number | symbol, unknown>) {
+    public updated(changedProperties: PropertyValues) {
         super.updated(changedProperties);
         this.derivedValue = this.observableValue * 3;
     }
@@ -95,9 +101,7 @@ export class TestMobxLitElementFirstUpdatedChange extends MobxLitElement {
     @observable
     private derivedValue: number = 1;
 
-    public firstUpdated(
-        changedProperties: Map<string | number | symbol, unknown>
-    ) {
+    public firstUpdated(changedProperties: PropertyValues) {
         super.firstUpdated(changedProperties);
         this.derivedValue = this.observableValue * 4;
     }
