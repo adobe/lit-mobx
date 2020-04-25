@@ -27,6 +27,8 @@ npm run demo
 
 ## Usage
 
+See the [JavaScript](https://stackblitz.com/edit/lit-mobx-demo?file=index.js) and [TypeScript](https://stackblitz.com/edit/lit-mobx-typescript?file=index.ts) example projects on StackBlitz.
+
 ```typescript
 import { LitElement, html, TemplateResult, customElement } from 'lit-element';
 import { observable, action } from 'mobx';
