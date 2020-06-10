@@ -1,3 +1,5 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/adobe/lit-mobx/badge.svg)](https://snyk.io/test/github/adobe/lit-mobx)
+
 # lit-mobx
 
 Mixin and base class that allow easy usage of mobx observables with
