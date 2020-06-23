@@ -1,0 +1,4 @@
+**/*.d.ts
+/lib/**/*
+/node_modules/**/*
+**/*.js

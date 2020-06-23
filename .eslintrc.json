@@ -1,0 +1,24 @@
+{
+    "root": true,
+    "plugins": ["notice"],
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "module"
+    },
+    "rules": {
+        "notice/notice": [
+            "error",
+            {
+                "mustMatch": "Copyright [0-9]{0,4} Adobe. All rights reserved.",
+                "templateFile": "license.js"
+            }
+        ]
+    },
+    "extends": ["plugin:prettier/recommended"]
+}

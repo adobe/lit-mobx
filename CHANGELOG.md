@@ -1,0 +1,23 @@
+<a name="0.0.4"></a>
+
+## [0.0.4](https://github.com/adobe/lit-mobx/compare/v0.0.3...v0.0.4) (2020-04-24)
+
+### Bug Fixes
+
+-   Switches Reaction from performUpdate to update, fixes [#26](https://github.com/adobe/lit-mobx/issues/26) ([#27](https://github.com/adobe/lit-mobx/issues/27)) ([bf0de8f](https://github.com/adobe/lit-mobx/commit/bf0de8f))
+
+<a name="0.0.3"></a>
+
+## [0.0.3](https://github.com/adobe/lit-mobx/compare/v0.0.2...v0.0.3) (2020-03-19)
+
+### Bug Fixes
+
+-   run tests in circle-ci, fixes [#20](https://github.com/adobe/lit-mobx/issues/20) ([#21](https://github.com/adobe/lit-mobx/issues/21)) ([607f8a5](https://github.com/adobe/lit-mobx/commit/607f8a5))
+
+<a name="0.0.2"></a>
+
+## [0.0.2](https://github.com/adobe/lit-mobx/compare/v0.0.1...v0.0.2) (2019-09-19)
+
+<a name="0.0.1"></a>
+
+## 0.0.1 (2019-09-18)
