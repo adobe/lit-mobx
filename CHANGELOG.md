@@ -1,3 +1,9 @@
+# [1.0.0](https://github.com/adobe/lit-mobx/compare/v0.0.4...v1.0.0) (2020-08-26)
+
+### Features
+
+-   release version 1.0.0, no changes from 0.0.4 ([4663520](https://github.com/adobe/lit-mobx/commit/46635204a008f23bc14f9ca15fbd01e6bd1b0200))
+
 <a name="0.0.4"></a>
 
 ## [0.0.4](https://github.com/adobe/lit-mobx/compare/v0.0.3...v0.0.4) (2020-04-24)
