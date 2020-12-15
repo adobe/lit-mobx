@@ -39,7 +39,7 @@
     },
     "devDependencies": {
         "@commitlint/cli": "^10.0.0",
-        "@commitlint/config-conventional": "^10.0.0",
+        "@commitlint/config-conventional": "^11.0.0",
         "@open-wc/testing": "^2.5.24",
         "@typescript-eslint/eslint-plugin": "^3.10.1",
         "@typescript-eslint/parser": "^3.10.1",
