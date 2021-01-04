@@ -26,7 +26,7 @@ npm run demo
 
 ## Usage
 
-See the [JavaScript](https://stackblitz.com/edit/lit-mobx-demo?file=index.js) and [TypeScript](https://stackblitz.com/edit/lit-mobx-typescript?file=index.ts) example projects on StackBlitz.
+See the [JavaScript](https://stackblitz.com/edit/lit-mobx-demo?file=index.js) and [TypeScript](https://stackblitz.com/edit/lit-mobx-typescript?file=index.ts) example projects on StackBlitz. See [this example](https://stackblitz.com/edit/lit-mobx-typescript-mobx6?file=index.ts) for a demonstration of usage with Mobx v6 in Typescript without the use of decorators.
 
 ```typescript
 import { LitElement, html, TemplateResult, customElement } from 'lit-element';
