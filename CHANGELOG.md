@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/adobe/lit-mobx/compare/v0.0.4...v1.0.1) (2021-01-19)
+
+### Bug Fixes
+
+-   fixes [#79](https://github.com/adobe/lit-mobx/issues/79) and updates dependencies ([2256227](https://github.com/adobe/lit-mobx/commit/225622791fa461b54fa9e91117c881856533979a))
+
 # [1.0.0](https://github.com/adobe/lit-mobx/compare/v0.0.4...v1.0.0) (2020-08-26)
 
 ### Features
