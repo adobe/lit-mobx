@@ -45,7 +45,7 @@
         "@typescript-eslint/parser": "^4.14.0",
         "@web/dev-server": "^0.1.4",
         "@web/test-runner": "^0.12.3",
-        "@web/test-runner-playwright": "^0.8.0",
+        "@web/test-runner-playwright": "^0.8.4",
         "conventional-changelog-cli": "^2.1.1",
         "deepmerge": "^4.2.2",
         "eslint": "^7.18.0",
