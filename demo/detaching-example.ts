@@ -10,9 +10,9 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, TemplateResult, customElement, property } from 'lit-element';
-import { nothing } from 'lit-html';
-import { cache } from 'lit-html/directives/cache.js';
+import { html, TemplateResult, nothing } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
+import { cache } from 'lit/directives/cache.js';
 
 import { MobxLitElement } from '../src/lit-mobx';
 import { Counter } from './my-counter';

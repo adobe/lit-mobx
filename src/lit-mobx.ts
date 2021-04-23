@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 
 import { MobxReactionUpdate } from './lib/mixin.js';
-import { LitElement } from 'lit-element';
+import { LitElement } from 'lit';
 
 export * from './lib/mixin.js';
 

@@ -10,7 +10,6 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html } from 'lit-element';
 import { expect, fixture, elementUpdated } from '@open-wc/testing';
 import {
     TestMobxLitElementUpdatesArrays,
@@ -24,9 +23,11 @@ import './test-elements';
 
 describe('MobxLitElement', () => {
     it('updates arrays', async () => {
-        const el = await fixture<TestMobxLitElementUpdatesArrays>(html`
-            <test-mobx-lit-element-updates-arrays></test-mobx-lit-element-updates-arrays>
-        `);
+        const el = await fixture<TestMobxLitElementUpdatesArrays>(
+            `
+                <test-mobx-lit-element-updates-arrays></test-mobx-lit-element-updates-arrays>
+            `
+        );
 
         expect(el, 'renders the initial values').shadowDom.to.equal(
             '<p>My Array</p><p></p><p>Array length = N/A</p>'
@@ -46,7 +47,7 @@ describe('MobxLitElement', () => {
     });
 
     it('renders changes in update callback', async () => {
-        const el = await fixture<TestMobxLitElementUpdateChange>(html`
+        const el = await fixture<TestMobxLitElementUpdateChange>(`
             <test-mobx-lit-element-update-change></test-mobx-lit-element-update-change>
         `);
 
@@ -62,7 +63,7 @@ describe('MobxLitElement', () => {
     });
 
     it('renders changes in updated callback', async () => {
-        const el = await fixture<TestMobxLitElementUpdatedChange>(html`
+        const el = await fixture<TestMobxLitElementUpdatedChange>(`
             <test-mobx-lit-element-updated-change></test-mobx-lit-element-updated-change>
         `);
 
@@ -79,7 +80,7 @@ describe('MobxLitElement', () => {
     });
 
     it('renders changes in firstUpdated callback', async () => {
-        const el = await fixture<TestMobxLitElementFirstUpdatedChange>(html`
+        const el = await fixture<TestMobxLitElementFirstUpdatedChange>(`
             <test-mobx-lit-element-first-updated-change></test-mobx-lit-element-first-updated-change>
         `);
 
@@ -97,7 +98,7 @@ describe('MobxLitElement', () => {
     });
 
     it('does not affect normal property update lifecycle', async () => {
-        const el = await fixture<TestMobxLitElementUpdatesArrays>(html`
+        const el = await fixture<TestMobxLitElementUpdatesArrays>(`
             <test-mobx-lit-element-updates-arrays></test-mobx-lit-element-updates-arrays>
         `);
 
@@ -113,7 +114,7 @@ describe('MobxLitElement', () => {
     });
 
     it('handles disconnected/reconnected states', async () => {
-        const el = await fixture<TestMobxLitElementUpdatesArrays>(html`
+        const el = await fixture<TestMobxLitElementUpdatesArrays>(`
             <test-mobx-lit-element-updates-arrays></test-mobx-lit-element-updates-arrays>
         `);
 
@@ -136,23 +137,30 @@ describe('MobxLitElement', () => {
             '<p>My Array</p><p>foo, bah</p><p>Array length = 2</p>'
         );
 
-        el.normalProperty = 'Foo Array';
-        await elementUpdated(el);
-        expect(
-            el,
-            'property changes still render, and reflect changed observables'
-        ).shadowDom.to.equal(
-            '<p>Foo Array</p><p>foo, bah, bash</p><p>Array length = 3</p>'
-        );
-
+        // observable changes while disconnected will do nothing, since we're not observing them
         el.observableArray.push('bang');
+        expect(
+            el.isUpdatePending,
+            'observable property changes will not queue an update'
+        ).to.equal(false);
+
+        // queue an update to a normal property while disconnected (to check we didn't break anything)
+        el.normalProperty = 'Foo Array';
+        expect(
+            el.isUpdatePending,
+            'normal property changes will queue an update'
+        ).to.equal(true);
+
+        // reconnect and await the update
         oldParent.appendChild(el);
         await elementUpdated(el);
         expect(
             el,
-            'observable change when reconnected causes render'
+            'observable change when disconnected is included in render after reconnection'
         ).shadowDom.to.equal(
             '<p>Foo Array</p><p>foo, bah, bash, bang</p><p>Array length = 4</p>'
         );
+
+        return true;
     });
 });

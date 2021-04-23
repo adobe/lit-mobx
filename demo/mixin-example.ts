@@ -10,7 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, TemplateResult, customElement, LitElement } from 'lit-element';
+import { html, TemplateResult, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
 import { MobxReactionUpdate } from '../lit-mobx.js';
 import { Counter } from './my-counter.js';

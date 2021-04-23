@@ -10,25 +10,25 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { UpdatingElement, PropertyValues } from 'lit-element';
+import { ReactiveElement, PropertyValues } from 'lit';
 import { Reaction } from 'mobx';
 
 const reaction = Symbol('LitMobxRenderReaction');
 const cachedRequestUpdate = Symbol('LitMobxRequestUpdate');
 
-type UpdatingElementConstructor = new (...args: any[]) => UpdatingElement;
+type ReactiveElementConstructor = new (...args: any[]) => ReactiveElement;
 
 /**
  * A class mixin which can be applied to lit-element's
- * [UpdatingElement](https://lit-element.polymer-project.org/api/classes/_lib_updating_element_.updatingelement.html)
- * derived classes. This mixin adds a mobx reaction which tracks the update method of UpdatingElement.
+ * [ReactiveElement](https://lit.dev/docs/api/ReactiveElement/)
+ * derived classes. This mixin adds a mobx reaction which tracks the update method of ReactiveElement.
  *
  * Any observables used in the render template of the element will be tracked by a reaction
  * and cause an update of the element upon change.
  *
- * @param constructor the constructor to extend from to add the mobx reaction, must be derived from UpdatingElement.
+ * @param constructor the constructor to extend from to add the mobx reaction, must be derived from ReactiveElement.
  */
-export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
+export function MobxReactionUpdate<T extends ReactiveElementConstructor>(
     constructor: T
 ): T {
     return class MobxReactingElement extends constructor {
@@ -63,7 +63,9 @@ export function MobxReactionUpdate<T extends UpdatingElementConstructor>(
                 this[reaction]!.track(
                     super.update.bind(this, changedProperties)
                 );
+                /* c8 ignore next 4 */
             } else {
+                // this should never happen, but just in case
                 super.update(changedProperties);
             }
         }
