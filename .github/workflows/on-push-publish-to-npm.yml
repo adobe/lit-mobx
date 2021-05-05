@@ -8,6 +8,7 @@ on:
 jobs:
     publish:
         runs-on: ubuntu-latest
+        container: mcr.microsoft.com/playwright:bionic
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
