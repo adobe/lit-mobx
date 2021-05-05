@@ -1,3 +1,5 @@
+# [2.0.0-rc.2](https://github.com/adobe/lit-mobx/compare/v2.0.0-rc.1...v2.0.0-rc.2) (2021-05-05)
+
 # [2.0.0-rc.1](https://github.com/adobe/lit-mobx/compare/v0.0.4...v2.0.0-rc.1) (2021-05-05)
 
 ### Bug Fixes
