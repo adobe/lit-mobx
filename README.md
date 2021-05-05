@@ -25,7 +25,7 @@ This library has been updated to the latest version of Lit which we highly recom
 npm install --save @adobe/lit-mobx@^1.0.0
 ```
 
-We will backport any security patches necessary (though don't expect there to be any) in this major version as necessary.
+We will backport any security patches (though don't expect there to be any) in this major version as necessary.
 
 ## Demo
 
