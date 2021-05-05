@@ -14,8 +14,8 @@ jobs:
     checkout:
         name: checkout
         runs-on: ubuntu-latest
-        container: mcr.microsoft.com/playwright:bionic
         steps:
+            - uses: microsoft/playwright-github-action@v1
             - uses: actions/checkout@v2
             - run: |
                   git config user.name github-actions
