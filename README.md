@@ -81,6 +81,8 @@ export class MyElement extends MobxLitElement {
 
 For further examples see the [demo folder](./demo).
 
+NOTE: observables are only hooked for updating the render function if those observables are directly used within the render function. The implementation of this library is such that we essential wrap the render function in an `autorun` block to hook these observables for re-running render. If you wish to response to an observable property to calculate some other result that then itself is used in the render function, then you need to use the regular MobX methods for observability in a property changed callback or some other lifecycle function to setup that observation and the write to a property in your component that is appropriately decorated to drive Lit's regular update cycle.
+
 ### Contributing
 
 Contributions are welcomed! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.
