@@ -10,13 +10,13 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { ReactiveElement, PropertyValues } from 'lit';
+import {
+    MobxReactionUpdateCustom,
+    ReactiveElementConstructor,
+} from './mixin-custom.js';
 import { Reaction } from 'mobx';
 
-const reaction = Symbol('LitMobxRenderReaction');
-const cachedRequestUpdate = Symbol('LitMobxRequestUpdate');
-
-type ReactiveElementConstructor = new (...args: any[]) => ReactiveElement;
+export { ReactiveElementConstructor } from './mixin-custom';
 
 /**
  * A class mixin which can be applied to lit-element's
@@ -31,43 +31,5 @@ type ReactiveElementConstructor = new (...args: any[]) => ReactiveElement;
 export function MobxReactionUpdate<T extends ReactiveElementConstructor>(
     constructor: T
 ): T {
-    return class MobxReactingElement extends constructor {
-        // NOTE: using a symbol here to avoid potential name collisions in derived classes
-        private [reaction]: Reaction | undefined;
-
-        private [cachedRequestUpdate] = () => {
-            this.requestUpdate();
-        };
-
-        public connectedCallback(): void {
-            super.connectedCallback();
-            const name =
-                this.constructor.name /* c8 ignore next */ || this.nodeName;
-            this[reaction] = new Reaction(
-                `${name}.update()`,
-                this[cachedRequestUpdate]
-            );
-            if (this.hasUpdated) this.requestUpdate();
-        }
-
-        public disconnectedCallback(): void {
-            super.disconnectedCallback();
-            if (this[reaction]) {
-                this[reaction]!.dispose();
-                this[reaction] = undefined;
-            }
-        }
-
-        protected update(changedProperties: PropertyValues): void {
-            if (this[reaction]) {
-                this[reaction]!.track(
-                    super.update.bind(this, changedProperties)
-                );
-                /* c8 ignore next 4 */
-            } else {
-                // this should never happen, but just in case
-                super.update(changedProperties);
-            }
-        }
-    };
+    return MobxReactionUpdateCustom(constructor, Reaction);
 }

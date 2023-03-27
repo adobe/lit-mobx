@@ -83,6 +83,24 @@ For further examples see the [demo folder](./demo).
 
 NOTE: observables are only hooked for updating the render function if those observables are directly used within the render function. The implementation of this library is such that we essential wrap the render function in an `autorun` block to hook these observables for re-running render. If you wish to response to an observable property to calculate some other result that then itself is used in the render function, then you need to use the regular MobX methods for observability in a property changed callback or some other lifecycle function to setup that observation and the write to a property in your component that is appropriately decorated to drive Lit's regular update cycle.
 
+## Custom Reaction
+
+In some rare cases applications may need to have multiple different major versions of Mobx within a single app. This can lead to issues where the version of mobx used in various places needs to be specifically imported from aliased versions of mobx, e.g. aliasing `mobx 6.x` to `mobx6`.
+
+To help support these cases lit-mobx provides the custom implementation of the MobxReactionUpdate mixin, `MobxReactionUpdateCustom`, that supports taking the `Reaction` constructor as a second argument. This allows the user to define which version of mobx to pass, and ensures that no side effects are caused by lit-mobx importing `mobx` directly.
+
+Example usage:
+
+```typescript
+import { MobxReactionUpdateCustom } from '@adobe/lit-mobx/lib/mixin-custom.js';
+
+// import your specific mobx version
+import { Reaction } from 'mobx6';
+
+// and pass it to the mixin to create your own mobx lit element base class
+class Mobx6LitElement extends MobxReactionUpdateCustom(LitElement, Reaction) {}
+```
+
 ### Contributing
 
 Contributions are welcomed! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.
