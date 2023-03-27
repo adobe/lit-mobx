@@ -1,3 +1,9 @@
+# [2.1.0](https://github.com/adobe/lit-mobx/compare/v2.0.0-rc.4...v2.1.0) (2023-03-27)
+
+### Features
+
+-   adds option to specify custom Reaction ([#161](https://github.com/adobe/lit-mobx/issues/161)) ([3aeaf7d](https://github.com/adobe/lit-mobx/commit/3aeaf7d094c439dc9bd498889bc31cac21f5d465))
+
 # [2.0.0](https://github.com/adobe/lit-mobx/compare/v2.0.0-rc.4...v2.0.0) (2021-10-12)
 
 # [2.0.0-rc.4](https://github.com/adobe/lit-mobx/compare/v2.0.0-rc.3...v2.0.0-rc.4) (2021-05-05)
