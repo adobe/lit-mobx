@@ -2,7 +2,7 @@ version: 2.1
 executors:
     node8:
         docker:
-            - image: mcr.microsoft.com/playwright:focal
+            - image: mcr.microsoft.com/playwright:v1.32.0-focal
         environment:
             NODE_ENV: development
             NPM_CONFIG_PREFIX: ~/.npm-global
