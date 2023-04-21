@@ -1,3 +1,9 @@
+# [2.2.0](https://github.com/adobe/lit-mobx/compare/v2.0.0-rc.4...v2.2.0) (2023-04-21)
+
+### Bug Fixes
+
+-   mobx6 removed IDerivation type ([#165](https://github.com/adobe/lit-mobx/issues/165)) ([dde88c4](https://github.com/adobe/lit-mobx/commit/dde88c430845af83d5eddc23ab85686a10e46cae))
+
 # [2.1.0](https://github.com/adobe/lit-mobx/compare/v2.0.0-rc.4...v2.1.0) (2023-03-27)
 
 ### Features
