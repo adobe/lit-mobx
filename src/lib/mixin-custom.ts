@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 
 import { ReactiveElement, PropertyValues } from 'lit';
-import type { IDerivation, Reaction } from 'mobx';
+import type { Reaction } from 'mobx';
 
 const reaction = Symbol('LitMobxRenderReaction');
 const cachedRequestUpdate = Symbol('LitMobxRequestUpdate');
@@ -21,14 +21,7 @@ export type ReactiveElementConstructor = new (
 ) => ReactiveElement;
 
 export interface ReactionConstructor {
-    new (
-        name: string,
-        onInvalidate: () => void,
-        errorHandler?:
-            | ((error: any, derivation: IDerivation) => void)
-            | undefined,
-        requiresObservable?: boolean
-    ): Reaction;
+    new (...args: any[]): Reaction;
 }
 
 /**
