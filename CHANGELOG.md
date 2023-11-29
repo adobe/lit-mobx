@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/adobe/lit-mobx/compare/v2.2.0...v2.2.1) (2023-11-29)
+
+### Bug Fixes
+
+-   adds lit v3 to peer dependencies list ([#169](https://github.com/adobe/lit-mobx/issues/169)) ([8759604](https://github.com/adobe/lit-mobx/commit/87596040e542fbe8522bd8a7d6866b2f5f723eeb))
+-   **ci:** reverts to earlier playwright version for test image ([#170](https://github.com/adobe/lit-mobx/issues/170)) ([b307c09](https://github.com/adobe/lit-mobx/commit/b307c09cbbabf59afc2fc8383d9aa8a63edf740e))
+
 # [2.2.0](https://github.com/adobe/lit-mobx/compare/v2.0.0-rc.4...v2.2.0) (2023-04-21)
 
 ### Bug Fixes
