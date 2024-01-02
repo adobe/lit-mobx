@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/adobe/lit-mobx/compare/v2.2.1...v2.2.2) (2024-01-02)
+
+### Bug Fixes
+
+-   correctly sets package as esm type, fixes [#171](https://github.com/adobe/lit-mobx/issues/171) ([#172](https://github.com/adobe/lit-mobx/issues/172)) ([e18db3e](https://github.com/adobe/lit-mobx/commit/e18db3eb6bd5bb0b5e00dca374e6515fb8a32c03))
+-   fixes commitlint config under esm ([#173](https://github.com/adobe/lit-mobx/issues/173)) ([b305dae](https://github.com/adobe/lit-mobx/commit/b305dae1890a5455801054149487608ac85f3431))
+
 ## [2.2.1](https://github.com/adobe/lit-mobx/compare/v2.2.0...v2.2.1) (2023-11-29)
 
 ### Bug Fixes
